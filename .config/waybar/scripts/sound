@@ -1,0 +1,31 @@
+#!/bin/sh
+
+volume_up() {
+  pactl set-sink-volume @DEFAULT_SINK@ +1%
+}
+
+volume_down() {
+  pactl set-sink-volume @DEFAULT_SINK@ -1%
+}
+
+mute_toggle() {
+  pactl set-sink-mute @DEFAULT_SINK@ toggle
+}
+
+case "$1" in
+  "volume_up" )
+  volume_up
+  ;;
+
+  "volume_down" )
+  volume_down
+  ;;
+
+  "mute_toggle" )
+  mute_toggle
+  ;;
+
+  * )
+  echo "Invalid parameter"
+  ;;
+esac

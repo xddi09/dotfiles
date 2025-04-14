@@ -1,0 +1,63 @@
+#!/bin/bash
+
+DRIVER="i2c_hid_acpi"
+STATUS_FILE="$XDG_RUNTIME_DIR/touchpad.status"
+STATUS=""
+
+check_root() {
+  if [ $(id -u) -ne 0 ]; then
+    echo "This script must be run with sudo!"
+    exit
+  fi
+}
+
+get_touchpad_status() {
+  if ! [ -f "${STATUS_FILE}" ]; then
+    STATUS="disabled"
+  elif [ $(cat "${STATUS_FILE}") == "true" ]; then
+    STATUS="enabled"
+  else
+    STATUS="disabled"
+  fi
+}
+
+enable_touchpad() {
+  if sudo modprobe ${DRIVER}; then
+    printf "true" >"${STATUS_FILE}"
+    notify-send -u normal "Enabling touchpad"
+  else
+    notify-send -u normal "Touchpad cannot be enabled"
+  fi
+}
+
+disable_touchpad() {
+  if sudo rmmod ${DRIVER}; then
+    printf "false" >"${STATUS_FILE}"
+    notify-send -u normal "Disabling touchpad"
+  else
+    notify-send -u normal "Touchpad cannot be disabled"
+  fi
+}
+
+toggle() {
+  if [ "${STATUS}" ==  "enabled" ]; then
+    echo "Disabling touchpad..."
+    disable_touchpad
+  else
+    echo "Enabling touchpad..."
+    enable_touchpad
+  fi
+}
+
+get_touchpad_status
+
+case "$1" in
+  "toggle" )
+  toggle
+  ;;
+
+  * )
+  echo "Invalid parameter"
+  ;;
+esac
+

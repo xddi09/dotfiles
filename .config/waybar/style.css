@@ -1,0 +1,97 @@
+@import "catppuccin-mocha.css";
+
+* {
+  font-family: monospace;
+  font-weight: 500;
+  font-size: 16px;
+  min-height: 0;
+}
+
+#waybar {
+  background: transparent;
+  color: @text;
+}
+
+#waybar > box {
+  margin: 5px;
+  background: @crust;
+  padding: 0 0.3rem;
+  box-shadow: 0px 0px 3px 1px @crust;
+}
+
+#workspaces button {
+  padding: 0.3rem 0.5rem;
+  margin: 0;
+  border-radius: 0;
+  border-left: 0px solid transparent;
+  border-right: 0px solid transparent;
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+}
+#workspaces button:hover {
+  background: @crust;
+  text-shadow: none;
+}
+#workspaces button label {
+  font-size: 1.2rem;
+  color: @text;
+}
+#workspaces button.active {
+  border-bottom: 2px solid @blue;
+}
+#workspaces button.active label {
+  color: @blue;
+}
+#workspaces button.empty label {
+  color: @surface1;
+}
+
+#language {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+#clock {
+  min-width: 6rem;
+}
+
+#pulseaudio.volume {
+  padding: 0 1rem;
+  color: @peach;
+}
+#pulseaudio.volume.muted {
+  color: @surface1;
+}
+
+#pulseaudio.microphone {
+  padding: 0 1rem;
+  color: @peach;
+}
+#pulseaudio.microphone.muted {
+  color: @surface1;
+}
+
+#bluetooth {
+  padding: 0 1rem;
+  color: @blue;
+}
+
+#network {
+  padding: 0 1rem;
+  color: @green;
+}
+
+#cpu {
+  padding: 0 1rem;
+  color: @lavender;
+}
+
+#memory {
+  padding: 0 1rem;
+  color: @teal;
+}
+
+#temperature {
+  padding: 0 1rem;
+  color: @maroon;
+}

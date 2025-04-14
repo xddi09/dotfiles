@@ -1,0 +1,31 @@
+#!/bin/sh
+
+volume_up() {
+  pactl set-source-volume @DEFAULT_SOURCE@ +1%
+}
+
+volume_down() {
+  pactl set-source-volume @DEFAULT_SOURCE@ -1%
+}
+
+mute_toggle() {
+  pactl set-source-mute @DEFAULT_SOURCE@ toggle
+}
+
+case "$1" in
+  "volume_up" )
+  volume_up
+  ;;
+
+  "volume_down" )
+  volume_down
+  ;;
+
+  "mute_toggle" )
+  mute_toggle
+  ;;
+
+  * )
+  echo "Invalid parameter"
+  ;;
+esac

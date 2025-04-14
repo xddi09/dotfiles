@@ -1,0 +1,205 @@
+@import "catppuccin-mocha.css";
+
+/* --- GENERAL --- */
+* {
+  font-family: SauceCodePro Nerd Font;
+  font-size: 13px;
+  min-height: 0;
+}
+
+#waybar {
+  background: transparent;
+  color: @text;
+}
+
+#window,
+#clock,
+#network,
+#idle_inhibitor,
+#pulseaudio,
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#battery,
+#custom-updates,
+#custom-dunst,
+#tray,
+#custom-lock,
+#custom-power {
+  background-color: @surface0;
+  padding: 0.5rem 0.75rem;
+  margin: 5px 0;
+}
+
+/* --- LEFT MODULES --- */
+#workspaces.all {
+  border-radius: 1rem 0 0 1rem;
+  margin: 5px 0 5px 5px;
+ 
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+  background-color: @surface0;
+}
+
+#workspaces.all button {
+  color: @blue;
+  background-color: transparent;
+  border-radius: 2rem;
+  border: none;
+  padding: 0.35rem; 
+  margin: 0.3rem 0.1rem;
+  font-weight: 700;
+
+  transition: color 0.5s, background-color 0.5s;
+}
+
+#workspaces.all button.empty.persistent {
+  color: @overlay0;
+  font-weight: 300;
+}
+
+#workspaces.all button.special {
+  color: @rosewater;
+}
+
+#workspaces.all button.active {
+  color: @blue;
+  background-color: @crust;
+}
+
+#workspaces.all button:hover {
+  color: @blue;
+  background: @surface1;
+  border: none;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+#workspaces.current {
+  border-radius: 0px 1rem 1rem 0px;
+  border-left: 1px solid @crust;
+  margin: 5px 5px 5px 0px;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+  background-color: @surface0;
+}
+
+#workspaces.current button {
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+#workspaces.current button:hover {
+  box-shadow: none;
+  text-shadow: none;
+  background: none;
+}
+
+#workspaces.current button label {
+  font-size: 0;
+}
+
+#workspaces.current button.active {
+  color: @blue;
+  font-weight: 700;
+  padding: 0.35rem;
+  border: none;
+}
+
+#workspaces.current button.active label {
+  font-size: 13px;
+}
+
+#window {
+  border-radius: 1rem;
+  background-color: @surface0;
+  margin: 5px 5px 5px 5px;
+}
+
+/* --- CENTER MODULES --- */
+
+#clock {
+  border-radius: 1rem;
+  color: @blue;
+  margin-right: 0.75rem;
+}
+
+/* --- RIGHT MODULES --- */
+
+#network {
+  color: @teal;
+  border-radius: 1rem 0px 0px 1rem;
+  margin-left: 1rem;
+}
+
+#idle_inhibitor.deactivated {
+  color: @peach;
+}
+
+#idle_inhibitor.activated {
+  color: @green;
+}
+
+#pulseaudio {
+  color: @maroon;
+}
+
+#cpu {
+  color: @mauve;
+}
+
+#memory {
+  color: @peach;
+}
+
+#temperature {
+  color: @flamingo;
+}
+
+#backlight {
+  color: @yellow;
+}
+
+#battery {
+  color: @green;
+}
+
+#battery.charging {
+  color: @green;
+}
+
+#battery.warning:not(.charging) {
+  color: @red;
+}
+
+#custom-updates {
+  color: @red;
+}
+
+#custom-dunst {
+  margin-right: 0.75rem;
+  border-radius: 0px 1rem 1rem 0px;
+  color: @sapphire;
+}
+
+/*---*/
+
+#tray {
+  margin-right: 0.75rem;
+  border-radius: 1rem;
+}
+
+/* --- */
+
+#custom-lock {
+  border-radius: 1rem 0px 0px 1rem;
+  color: @lavender;
+}
+
+#custom-power {
+  margin: 5px 5px 5px 0;
+  border-radius: 0px 1rem 1rem 0px;
+  color: @red;
+}

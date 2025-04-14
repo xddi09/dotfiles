@@ -1,0 +1,98 @@
+#!/bin/bash
+
+ouptut=$(nmcli -f ssid,security,signal -t device wifi)
+wifi_list=""
+
+while IFS= read -r line; do
+  ssid=$(echo $line | awk -F ":" '{print $1}')
+  security=$(echo $line | awk -F ":" '{print $2}')
+  signal=$(echo $line | awk -F ":" '{print $3}')
+
+  if [ "$signal" -gt 75 ]; then
+    level="󰢾"
+  elif [ "$signal" -gt 50 ]; then
+    level="󰢽"
+  elif [ "$signal" -gt 25 ]; then
+    level="󰢼"
+  else
+    level="󰢿"
+  fi
+
+  if [[ $ssid ]]; then
+    result="${level}  ~${ssid}~  (${security})"
+
+    if [[ $wifi_list ]]; then
+      wifi_list="${wifi_list}\n${result}"
+    else
+      wifi_list="${result}"
+    fi
+  fi
+done <<< "$ouptut"
+
+connected=$(nmcli -fields WIFI g)
+if [[ "$connected" =~ "enabled" ]]; then
+  list="󰖪  Disable Wi-Fi\n${wifi_list}"
+elif [[ "$connected" =~ "disabled" ]]; then
+  list="󰖩  Enable Wi-Fi"
+fi
+
+# Use rofi to select wifi network
+chosen_network=$(echo -e "$list" | uniq -u | rofi -dmenu -no-show-icons -i -selected-row 1 -p "Enter SSID: " )
+
+# Get name of connection
+chosen_ssid=$(echo "$chosen_network" | awk -F "~" '{print $2}')
+chosen_security=$(echo "$chosen_network" | awk -F "~" '{print $3}')
+read -r chosen_id <<< "$chosen_ssid"
+
+if [ "$chosen_network" = "" ]; then
+  exit
+fi
+
+if [ "$chosen_network" =~ "Enable" ]; then
+  status=$(nmcli radio wifi on)
+
+  if [[ -z $status ]]; then
+    notify-send -u normal "Wi-Fi has been enabled."
+  else
+    notify-send -u critical "Wi-Fi cannot be enabled. Some errorrs occured."
+  fi
+
+  exit
+fi
+
+if [ "$chosen_network" =~ "Disable" ]; then
+  status=$(nmcli radio wifi off)
+
+  if [[ -z $status ]]; then
+    notify-send -u normal "Wi-Fi has been disabled."
+  else
+    notify-send -u critical "Wi-Fi cannot be disabled. Some errors occured."
+  fi
+
+  exit
+fi
+
+is_saved=$(nmcli -g NAME connection | grep -w "$chosen_id")
+
+if [[ $is_saved ]]; then
+  status=$(nmcli connection up id "$chosen_id" | grep "successfully")
+
+  if [[ $status ]]; then
+    notify-send -u normal "Connection established with SSID $chosen_id."
+  else
+    notify-send -u critical "Connection not established. Some errors occured."
+  fi
+  
+  exit
+fi
+
+# If new connection, provide password
+password=$(rofi -dmenu -p "Password: ")
+status=$(nmcli device wifi connect "$chosen_id" password "$password")
+
+if [[ $(echo $status | grep -w "successfully") ]]; then
+  notify-send -u normal "Connection established with SSID $chosen_id."
+else
+  notify-send -u critical "Connection not established. $status"
+fi
+

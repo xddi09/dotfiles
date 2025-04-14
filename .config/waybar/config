@@ -1,0 +1,195 @@
+// -*- mode: jsonc; -*-
+{
+  // --- GENERAL ---
+  "layer": "top",
+  "position": "top",
+
+
+  "modules-left": [
+    "hyprland/workspaces"
+  ],
+  "modules-center": [
+    "clock#date",
+    "clock#time"
+  ],
+  "modules-right": [
+    "cpu",
+    "memory",
+    "temperature",
+    "hyprland/language",
+    "network",
+    "bluetooth",
+    "pulseaudio#volume",
+    "pulseaudio#microphone"
+    //"backlight", 
+    //"battery", 
+    //"custom/dunst", 
+    //"tray", 
+    //"clock", 
+    //"custom/lock", 
+    //"custom/power"
+  ],
+
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "all-outputs": true,
+    "only-active": false,
+    "persistent-workspaces": {
+      "*": 9
+    },
+    "format-icons": {
+      "1": "󱓟",
+      "2": "󰞷",
+      "3": "󰅴",
+      "4": "󰧞",
+      "5": "󰧞",
+      "6": "󰧞",
+      "7": "󰧞",
+      "8": "󰧞",
+      "9": "󰧞"
+    }
+  },
+
+  "hyprland/language": {
+    "format": "{}",
+    "format-ru": "🇷🇺",
+    "format-en": "🇺🇸"
+  },
+
+  "network": {
+    "format-wifi": "<span size='large'>󰖩</span>    {essid}",
+    "format-ethernet": "<span size='large'>󰈀</span>    {ipaddr}",
+    "format-linked": "<span size='large'>󰈀</span>    no ip",
+    "format-disconnected": "<span size='large'>󰈀</span>    off",
+    "tooltip-format": "",
+    "tooltip-format-wifi": "",
+    "on-click": ""
+  },
+
+  "bluetooth": {
+    "format": "<span size='large'>󰂯</span>  {status}",
+    "format-disabled": "<span size='large'>󰂯</span>  off",
+    "format-connected": "<span size='large'>󰂯</span>  {num_connections} device"
+  },
+  
+  "pulseaudio#volume": {
+    "format": "<span size='large'>󰕾</span>   {volume}%",
+    "format-muted": "<span size='large'>󰖁</span>   {volume}%",
+    "format-bluetooth": "<span size='large'>󰂯󰕾</span>   {volume}%",
+    "format-bluetooth-muted": "<span size='large'>󰕾</span>   {volume}%",
+    "format-source": "",
+    "format-source-muted": "",
+  },
+
+  "pulseaudio#microphone": {
+    "format-source": "󰍬  {volume}%",
+    "format-source-muted": "󰍭  {volume}%",
+    "format": "",
+    "format-muted": "",
+    "format-bluetooth": "",
+    "format-bluetooth-muted": "",
+  },
+
+  "cpu": {
+    "interval": 10,
+    "format": "CPU  {usage}%",
+  },
+
+  "memory": {
+    "interval": 10,
+    "format": "MEM  {percentage}%",
+  },
+
+  "temperature": {
+    "interval": 10,
+    "critical-threshold": 80,
+    "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+    "format": "TEMP  {temperatureC}°C",
+  },
+
+  "clock#time": {
+    "interval": 1,
+    "format": "{:%H:%M:%S}"
+  },
+
+  "clock#date": {
+    "interval": 1,
+    "format": "{:%b %d}"
+  },
+
+
+
+
+
+
+
+
+    // --- RIGHT MODULES ---
+
+
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+
+    "backlight": {
+        "format": "{percent}% {icon}",
+        "format-icons": ["", "", "", "", "", "", "", "", ""],
+        "on-scroll-up": "exec brightnessctl set +5%",
+        "on-scroll-down": "exec brightnessctl set 5%-",
+    },
+
+    "battery": {
+        "interval": 60,
+        "full-at": 95,
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% 󰂄",
+        "format-plugged": "{capacity}% ",
+        "format-icons": ["󱃍", "󱃍", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰁹"],
+        "tooltip-format": "{capacity}%\n{timeTo}\n{power} W"
+    },
+
+    "custom/updates": {
+        "interval": 3600, // every hour
+        "exec": "~/.config/waybar/scripts/get_updates.sh",
+        "return-type": "json",
+        "exec-if": "exit 0",
+        "exec-on-event": false,
+        "on-click": "kitty sh -c ~/.config/waybar/scripts/update.sh",
+        "signal": 8,
+    },
+
+    "custom/dunst": {
+        "exec": "~/.config/waybar/scripts/dunst.sh",
+        "return-type": "json",
+        "on-click": "dunstctl set-paused toggle",
+    },
+
+    // ---
+
+    "tray": {
+        "icon-size": 15,
+        "spacing": 10
+    },
+
+    // ---
+
+    "custom/lock": {
+        "tooltip": false,
+        "on-click": "swaylock",
+        "format": "",
+    },
+
+    "custom/power": {
+        "tooltip": false,
+        "on-click": "~/.config/rofi/scripts/power.sh",
+        "format": "⏻"
+    }
+}
