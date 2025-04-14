@@ -1,9 +1,9 @@
 [general]
-import = ["~/.config/alacritty/catppuccin-mocha.toml"]
+import = ["~/.config/alacritty/nord.toml"]
 live_config_reload = true
 
 [window]
-opacity = 0.95
+opacity = 1
 
 [env]
 TERM = "xterm-256color"

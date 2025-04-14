@@ -29,8 +29,5 @@ zstyle ':omz:update' mode reminder
 source $ZSH/p10k.zsh
 source $ZSH/aliases.zsh
 source $ZSH/keybindings.zsh
+source $HOME/.profile
 
-export EDITOR=vim
-export PATH=$PATH:$HOME/.local/bin
-export XDG_CONFIG_HOME=$HOME/.config
-export PASSWORD_STORE_ENABLE_EXTENSIONS=true
