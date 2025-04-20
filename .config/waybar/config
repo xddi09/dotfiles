@@ -37,25 +37,25 @@
       "*": 2
     },
     "format-icons": {
-      "1": "<span size='15000'>󱓟</span>",
-      "2": "<span size='15000'>󰞷</span>",
-      "default": "<span size='15000'>󰧞</span>",
+      "1": "<span size='16pt' baseline_shift='-1.5pt'>󱓟</span>",
+      "2": "<span size='16pt' baseline_shift='-1.5pt'>󰞷</span>",
+      "default": "<span size='16pt' baseline_shift='-1.5pt'>󰧞</span>",
     }
   },
 
   "network": {
-    "format": "<span size='15000'>󰲜</span>    off",
-    "format-wifi": "<span size='15000'>󰖩</span>    {essid}",
-    //"format-wifi": "<span size='15000'>󰱔</span>    {essid}",
-    "format-ethernet": "<span size='15000'>󰱔</span>    {ipaddr}",
-    "format-linked": "<span size='15000'>󰲊</span>    no ip",
-    "format-disabled": "<span size='15000'>󰲜</span>    off"
+    "format": "<span size='16pt' baseline_shift='-1.5pt'>󰲜</span>    off",
+    "format-wifi": "<span size='16pt' baseline_shift='-1.5pt'>󰖩</span>    {essid}",
+    //"format-wifi": "<span size='16pt' baseline_shift='-1.5pt'>󰱔</span>    {essid}",
+    "format-ethernet": "<span size='16pt' baseline_shift='-1.5pt'>󰱔</span>    {ipaddr}",
+    "format-linked": "<span size='16pt' baseline_shift='-1.5pt'>󰲊</span>    no ip",
+    "format-disabled": "<span size='16pt' baseline_shift='-1.5pt'>󰲜</span>    off"
   },
 
   "bluetooth": {
-    "format": "<span size='15000'>󰂯</span>  {status}",
-    "format-disabled": "<span size='15000'>󰂯</span>  off",
-    "format-connected": "<span size='15000'>󰂯</span>  {num_connections} device"
+    "format": "<span size='16pt' baseline_shift='-1.5pt'>󰂯</span>  {status}",
+    "format-disabled": "<span size='16pt' baseline_shift='-1.5pt'>󰂯</span>  off",
+    "format-connected": "<span size='16pt' baseline_shift='-1.5pt'>󰂯</span>  {num_connections} device"
   },
 
   "hyprland/language": {
@@ -66,17 +66,17 @@
 
   "memory": {
     "interval": 10,
-    "format": "<span size='15000'>󱕎</span>    {percentage}%",
+    "format": "<span size='16pt' baseline_shift='-1.5pt'>󱕎</span>    {percentage}%",
   },
   
   "cpu": {
     "interval": 10,
-    "format": "<span size='15000'></span>     {usage}%"
+    "format": "<span size='16pt' baseline_shift='-1.5pt'></span>     {usage}%"
   },
 
   "disk": {
     "interval": 30,
-    "format": "<span size='15000'>󰏗</span>    {percentage_used}%",
+    "format": "<span size='16pt' baseline_shift='-1.5pt'>󰏗</span>    {percentage_used}%",
     "path": "/"
   },
 
@@ -84,14 +84,14 @@
     "interval": 10,
     "critical-threshold": 80,
     "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
-    "format": "<span size='15000'></span>    {temperatureC}°C",
+    "format": "<span size='16pt' baseline_shift='-1.5pt'></span>    {temperatureC}°C",
   },
   
   "pulseaudio#volume": {
-    "format": "<span size='15000'>󰕾</span>    {volume}%",
-    "format-muted": "<span size='15000'>󰕾</span>    {volume}%",
-    "format-bluetooth": "<span size='15000'>󰋋</span>    {volume}%",
-    "format-bluetooth-muted": "<span size='15000'>󰟎</span>    {volume}%",
+    "format": "<span size='16pt' baseline_shift='-1.5pt'>󰕾</span>    {volume}%",
+    "format-muted": "<span size='16pt' baseline_shift='-1.5pt'>󰕾</span>    {volume}%",
+    "format-bluetooth": "<span size='16pt' baseline_shift='-1.5pt'>󰋋</span>    {volume}%",
+    "format-bluetooth-muted": "<span size='16pt' baseline_shift='-1.5pt'>󰟎</span>    {volume}%",
     "format-source": "",
     "format-source-muted": ""
   },
@@ -101,8 +101,8 @@
     "format-muted": "",
     "format-bluetooth": "",
     "format-bluetooth-muted": "",
-    "format-source": "<span size='15000'>󰍬</span>    {volume}%",
-    "format-source-muted": "<span size='15000'>󰍭</span>    {volume}%"
+    "format-source": "<span size='16pt' baseline_shift='-1.5pt'>󰍬</span>    {volume}%",
+    "format-source-muted": "<span size='16pt' baseline_shift='-1.5pt'>󰍭</span>    {volume}%"
   },
 
 }
