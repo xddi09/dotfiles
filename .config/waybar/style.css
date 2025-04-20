@@ -1,97 +1,78 @@
-@import "catppuccin-mocha.css";
+@import "catppuccin.css";
 
 * {
-  font-family: monospace;
-  font-weight: 500;
-  font-size: 16px;
+  font-family: Roboto;
+  font-weight: 400;
+  font-size: 18px;
   min-height: 0;
+  color: @text;
 }
 
 #waybar {
-  background: transparent;
-  color: @text;
+  background-color: transparent;
 }
 
 #waybar > box {
-  margin: 5px;
-  background: @crust;
-  padding: 0 0.3rem;
-  box-shadow: 0px 0px 3px 1px @crust;
+  margin: 0 0 10px;
+  padding: 0;
+  background-color: rgba(30, 30, 46, 0.85);
+  /* border-bottom: 1px solid @surface0; */
 }
 
 #workspaces button {
-  padding: 0.3rem 0.5rem;
-  margin: 0;
-  border-radius: 0;
-  border-left: 0px solid transparent;
-  border-right: 0px solid transparent;
-  border-top: 2px solid transparent;
-  border-bottom: 2px solid transparent;
-}
-#workspaces button:hover {
-  background: @crust;
-  text-shadow: none;
-}
-#workspaces button label {
-  font-size: 1.2rem;
-  color: @text;
-}
-#workspaces button.active {
-  border-bottom: 2px solid @blue;
-}
-#workspaces button.active label {
-  color: @blue;
-}
-#workspaces button.empty label {
-  color: @surface1;
+  padding: 5px;
 }
 
-#language {
-  padding-left: 1rem;
-  padding-right: 1rem;
+#clock,
+#network,
+#bluetooth,
+#language,
+#memory,
+#temperature,
+#disk,
+#cpu,
+#pulseaudio {
+  padding: 8px 10px 6px;
 }
 
 #clock {
-  min-width: 6rem;
+  padding-top: 10px;
 }
 
-#pulseaudio.volume {
-  padding: 0 1rem;
-  color: @peach;
-}
-#pulseaudio.volume.muted {
-  color: @surface1;
-}
-
-#pulseaudio.microphone {
-  padding: 0 1rem;
-  color: @peach;
-}
-#pulseaudio.microphone.muted {
-  color: @surface1;
-}
-
-#bluetooth {
-  padding: 0 1rem;
-  color: @blue;
-}
-
-#network {
-  padding: 0 1rem;
+#network.wifi,
+#network.ethernet {
   color: @green;
 }
 
-#cpu {
-  padding: 0 1rem;
-  color: @lavender;
+#bluetooth.connected {
+  color: @blue;
 }
 
-#memory {
-  padding: 0 1rem;
-  color: @teal;
+#language {
+  font-weight: 600;
+  font-size: 20px;
+  min-width: 30px;
+  padding-top: 7px;
+  color: @subtext1;
 }
 
-#temperature {
-  padding: 0 1rem;
-  color: @maroon;
+#pulseaudio.volume {
+  color: @peach;
+}
+
+#pulseaudio.microphone {
+  color: @red;
+}
+
+#workspaces {
+  padding: 0 5px;
+}
+#workspaces button {
+  padding: 0 15px;
+  border-radius: 0;
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+}
+#workspaces button.active {
+  border-bottom: 2px solid @blue;
 }

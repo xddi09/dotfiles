@@ -1,195 +1,109 @@
-// -*- mode: jsonc; -*-
 {
-  // --- GENERAL ---
   "layer": "top",
   "position": "top",
 
-
   "modules-left": [
+    //"custom/wttr",
     "hyprland/workspaces"
   ],
   "modules-center": [
-    "clock#date",
-    "clock#time"
-  ],
-  "modules-right": [
+    "temperature",
     "cpu",
     "memory",
-    "temperature",
-    "hyprland/language",
-    "network",
-    "bluetooth",
-    "pulseaudio#volume",
-    "pulseaudio#microphone"
-    //"backlight", 
-    //"battery", 
-    //"custom/dunst", 
-    //"tray", 
-    //"clock", 
-    //"custom/lock", 
-    //"custom/power"
+    "disk",
   ],
+  "modules-right": [
+    //"pulseaudio#volume",
+    //"pulseaudio#microphone",
+    //"hyprland/language",
+    "bluetooth",
+    "network",
+    "pulseaudio#volume",
+    "pulseaudio#microphone",
+    "hyprland/language",
+    "clock"
+  ],
+
+  "clock": {
+    "interval": 1,
+    "format": "{:%B %d    %H:%M:%S}"
+  },
 
   "hyprland/workspaces": {
     "format": "{icon}",
     "all-outputs": true,
     "only-active": false,
     "persistent-workspaces": {
-      "*": 9
+      "*": 2
     },
     "format-icons": {
-      "1": "󱓟",
-      "2": "󰞷",
-      "3": "󰅴",
-      "4": "󰧞",
-      "5": "󰧞",
-      "6": "󰧞",
-      "7": "󰧞",
-      "8": "󰧞",
-      "9": "󰧞"
+      "1": "<span size='15000'>󱓟</span>",
+      "2": "<span size='15000'>󰞷</span>",
+      "default": "<span size='15000'>󰧞</span>",
     }
+  },
+
+  "network": {
+    "format": "<span size='15000'>󰲜</span>    off",
+    "format-wifi": "<span size='15000'>󰖩</span>    {essid}",
+    //"format-wifi": "<span size='15000'>󰱔</span>    {essid}",
+    "format-ethernet": "<span size='15000'>󰱔</span>    {ipaddr}",
+    "format-linked": "<span size='15000'>󰲊</span>    no ip",
+    "format-disabled": "<span size='15000'>󰲜</span>    off"
+  },
+
+  "bluetooth": {
+    "format": "<span size='15000'>󰂯</span>  {status}",
+    "format-disabled": "<span size='15000'>󰂯</span>  off",
+    "format-connected": "<span size='15000'>󰂯</span>  {num_connections} device"
   },
 
   "hyprland/language": {
     "format": "{}",
-    "format-ru": "🇷🇺",
-    "format-en": "🇺🇸"
-  },
-
-  "network": {
-    "format-wifi": "<span size='large'>󰖩</span>    {essid}",
-    "format-ethernet": "<span size='large'>󰈀</span>    {ipaddr}",
-    "format-linked": "<span size='large'>󰈀</span>    no ip",
-    "format-disconnected": "<span size='large'>󰈀</span>    off",
-    "tooltip-format": "",
-    "tooltip-format-wifi": "",
-    "on-click": ""
-  },
-
-  "bluetooth": {
-    "format": "<span size='large'>󰂯</span>  {status}",
-    "format-disabled": "<span size='large'>󰂯</span>  off",
-    "format-connected": "<span size='large'>󰂯</span>  {num_connections} device"
-  },
-  
-  "pulseaudio#volume": {
-    "format": "<span size='large'>󰕾</span>   {volume}%",
-    "format-muted": "<span size='large'>󰖁</span>   {volume}%",
-    "format-bluetooth": "<span size='large'>󰂯󰕾</span>   {volume}%",
-    "format-bluetooth-muted": "<span size='large'>󰕾</span>   {volume}%",
-    "format-source": "",
-    "format-source-muted": "",
-  },
-
-  "pulseaudio#microphone": {
-    "format-source": "󰍬  {volume}%",
-    "format-source-muted": "󰍭  {volume}%",
-    "format": "",
-    "format-muted": "",
-    "format-bluetooth": "",
-    "format-bluetooth-muted": "",
-  },
-
-  "cpu": {
-    "interval": 10,
-    "format": "CPU  {usage}%",
+    "format-ru": "ru",
+    "format-en": "us"
   },
 
   "memory": {
     "interval": 10,
-    "format": "MEM  {percentage}%",
+    "format": "<span size='15000'>󱕎</span>    {percentage}%",
+  },
+  
+  "cpu": {
+    "interval": 10,
+    "format": "<span size='15000'></span>     {usage}%"
+  },
+
+  "disk": {
+    "interval": 30,
+    "format": "<span size='15000'>󰏗</span>    {percentage_used}%",
+    "path": "/"
   },
 
   "temperature": {
     "interval": 10,
     "critical-threshold": 80,
     "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
-    "format": "TEMP  {temperatureC}°C",
+    "format": "<span size='15000'></span>    {temperatureC}°C",
+  },
+  
+  "pulseaudio#volume": {
+    "format": "<span size='15000'>󰕾</span>    {volume}%",
+    "format-muted": "<span size='15000'>󰕾</span>    {volume}%",
+    "format-bluetooth": "<span size='15000'>󰋋</span>    {volume}%",
+    "format-bluetooth-muted": "<span size='15000'>󰟎</span>    {volume}%",
+    "format-source": "",
+    "format-source-muted": ""
   },
 
-  "clock#time": {
-    "interval": 1,
-    "format": "{:%H:%M:%S}"
+  "pulseaudio#microphone": {
+    "format": "",
+    "format-muted": "",
+    "format-bluetooth": "",
+    "format-bluetooth-muted": "",
+    "format-source": "<span size='15000'>󰍬</span>    {volume}%",
+    "format-source-muted": "<span size='15000'>󰍭</span>    {volume}%"
   },
 
-  "clock#date": {
-    "interval": 1,
-    "format": "{:%b %d}"
-  },
-
-
-
-
-
-
-
-
-    // --- RIGHT MODULES ---
-
-
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
-    },
-
-    "backlight": {
-        "format": "{percent}% {icon}",
-        "format-icons": ["", "", "", "", "", "", "", "", ""],
-        "on-scroll-up": "exec brightnessctl set +5%",
-        "on-scroll-down": "exec brightnessctl set 5%-",
-    },
-
-    "battery": {
-        "interval": 60,
-        "full-at": 95,
-        "states": {
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% 󰂄",
-        "format-plugged": "{capacity}% ",
-        "format-icons": ["󱃍", "󱃍", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰁹"],
-        "tooltip-format": "{capacity}%\n{timeTo}\n{power} W"
-    },
-
-    "custom/updates": {
-        "interval": 3600, // every hour
-        "exec": "~/.config/waybar/scripts/get_updates.sh",
-        "return-type": "json",
-        "exec-if": "exit 0",
-        "exec-on-event": false,
-        "on-click": "kitty sh -c ~/.config/waybar/scripts/update.sh",
-        "signal": 8,
-    },
-
-    "custom/dunst": {
-        "exec": "~/.config/waybar/scripts/dunst.sh",
-        "return-type": "json",
-        "on-click": "dunstctl set-paused toggle",
-    },
-
-    // ---
-
-    "tray": {
-        "icon-size": 15,
-        "spacing": 10
-    },
-
-    // ---
-
-    "custom/lock": {
-        "tooltip": false,
-        "on-click": "swaylock",
-        "format": "",
-    },
-
-    "custom/power": {
-        "tooltip": false,
-        "on-click": "~/.config/rofi/scripts/power.sh",
-        "format": "⏻"
-    }
 }
+

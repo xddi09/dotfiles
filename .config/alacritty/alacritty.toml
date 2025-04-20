@@ -1,5 +1,5 @@
 [general]
-import = ["~/.config/alacritty/nord.toml"]
+import = ["~/.config/alacritty/catppuccin.toml"]
 live_config_reload = true
 
 [window]
@@ -35,15 +35,15 @@ shape = "Block"
 size = 16
 
 [font.normal]
-family = "monospace"
+family = "RobotoMono Nerd Font Mono"
 style = "Regular"
 
 [font.bold]
-family = "monospace"
+family = "RobotoMono Nerd Font Mono"
 style = "Bold"
 
 [font.italic]
-family = "monospace"
+family = "RobotoMono Nerd Font Mono"
 style = "Italic"
 
 [mouse]
