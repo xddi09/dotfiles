@@ -1,0 +1,65 @@
+;; global configuration options
+(defcfg
+  process-unmapped-keys yes
+  concurrent-tap-hold yes
+  log-layer-changes no
+)
+
+;; define keys that will be modified (all keys still processed)
+(defsrc
+  esc
+  grv
+  caps
+  a s d f g h j k l scln
+  lalt spc ralt
+)
+
+;; default/base layer modifications always active
+(deflayer default
+  _
+  _
+  @cap
+  @a @s @d @f _ _ @j @k @l @scln
+  esc _ bspc
+)
+
+;; shifted layer activated by holding CAPS lock
+(deflayer cap-mod
+  _
+  _
+  _
+  _ _ _ _ _ left down up rght _
+  _ bspc _
+)
+
+;; values used by multiple changes
+(defvar
+  tap-time 200
+  hold-time 400
+  slow-hold-time 500
+)
+
+(deftemplate charmod (char mod)
+  (switch
+    ((key-timing 3 less-than 450)) $char break
+    () (tap-hold-release $tap-time $slow-hold-time $char $mod) break
+  )
+)
+
+(defchordsv2
+  (  s d f) 	esc 50 all-released  ()
+)
+
+;; remapping between physical keys and functionality
+(defalias
+  cap (t! charmod esc (layer-toggle cap-mod))
+  a (t! charmod a lctl)
+  s (t! charmod s lalt)
+  d (t! charmod d lmet)
+  f (t! charmod f lsft)
+  j (t! charmod j rsft)
+  k (t! charmod k rmet)
+  l (t! charmod l ralt)
+  scln (t! charmod ; rctl)
+)
+

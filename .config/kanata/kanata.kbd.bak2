@@ -1,0 +1,86 @@
+(defcfg
+  concurrent-tap-hold yes
+  process-unmapped-keys yes
+  sequence-timeout 2000
+  movemouse-smooth-diagonals yes
+)
+
+(defsrc
+  esc
+  grv
+  tab   q     w     e     r     t     y     u     i     o     p
+  caps  a     s     d     f     g     h     j     k     l     ;
+  lsft  z     x     c     v     b     n     m     ,     .     /
+                                spc
+)
+
+(defvar
+  chord-s 30
+  chord-l 200
+  
+  mouse-time 4
+  mouse-distance 2
+  mouse-wheel-time 50
+  mouse-wheel-distance 150
+
+  mmS (t! switch-persist-layer mouse)
+)
+
+(deftemplate switch-persist-layer (layer)
+  (switch 
+    ((layer $layer)) (layer-switch default) break
+    ((layer default)) (layer-switch $layer) break 
+  )
+)
+
+(deftemplate home-row-mod (tap hold)
+  (tap-hold 210 210 $tap $hold)
+)
+
+(defalias
+  ;; Home row mods
+  hls (t! home-row-mod _ lsft)
+  hla (t! home-row-mod _ lalt)
+  hlc (t! home-row-mod _ lctl)
+  hrs (t! home-row-mod _ rsft)
+  hra (t! home-row-mod _ ralt)
+  hrc (t! home-row-mod _ rctl)
+  hmt (t! home-row-mod _ met)
+
+  ;; Mouse aliases
+  mwu (mwheel-up $mouse-wheel-time $mouse-wheel-distance)
+  mwd (mwheel-down $mouse-wheel-time $mouse-wheel-distance)
+  mwl (mwheel-left $mouse-wheel-time $mouse-wheel-distance)
+  mwr (mwheel-right $mouse-wheel-time $mouse-wheel-distance)
+  mmu (movemouse-up $mouse-time $mouse-distance)
+  mmd (movemouse-down $mouse-time $mouse-distance)
+  mml (movemouse-left $mouse-time $mouse-distance)
+  mmr (movemouse-right $mouse-time $mouse-distance)
+  mfs (movemouse-speed 200)
+  msl (movemouse-speed 50)
+  mdl (macro mlft 26 mlft)
+)
+
+(defchordsv2 
+  (w e) esc $chord-s all-released ()
+  (i o) bspc $chord-s all-released ()
+  (, .) $mmS $chord-s all-released ()
+)
+
+(deflayer default
+  _
+  _
+  _     _     _     _     _     _     _     _     _     _     _
+  _     @hmt  @hlc  @hla  @hls  _     _     @hrs  @hra  @hrc  @hmt
+  _     _     _     _     _     _     _     _     _     _     _
+                                _
+)
+
+(deflayer mouse
+  XX
+  XX
+  XX    @mwl  @mwd  @mwu  @mwr  @mfs  XX    XX    XX    XX    XX
+  XX    @mdl  mlft  mmid  mrgt  @msl  @mml  @mmd  @mmu  @mmr  XX
+  XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX
+                                _
+)

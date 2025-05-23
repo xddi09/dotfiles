@@ -1,0 +1,31 @@
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defsrc
+  caps
+  u
+  h j k l
+  ;;spc
+)
+
+(deflayer default
+  @cap
+  _
+  _ _ _ _ 
+  ;;@spc
+)
+
+(deflayer arrows
+  _
+  bspc
+  left down up rght
+  ;;_
+)
+
+(defalias
+  ;;cap (tap-hold-press 100 200 esc lctl)
+  cap esc
+  spc (tap-hold-press 100 200 spc (layer-toggle arrows))
+)
+
