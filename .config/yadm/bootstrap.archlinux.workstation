@@ -1,0 +1,52 @@
+#!/bin/bash
+
+set -eufo pipefail
+
+info_message() {
+    echo -e "\n\033[0;32m[yadm bootstrap archlinux workstation] $1\033[0m"
+}
+
+stage_message() {
+  echo -e "\n\033[0;34m[yadm bootstrap archlinux workstation] $1\033[0m"
+}
+
+TMP_DIR="/tmp/bootstrap"
+HOME_SYSTEM_DIR="$HOME/.config/system"
+
+PACKAGES=(
+  cuda
+  nvidia-dkms
+  nvidia-utils
+)
+
+AUR_PACKAGES=(
+  rtl88x2bu-dkms-git
+)
+
+info_message "ArchLinux setup started."
+
+stage_message "Clear tmp dir..."
+rm -rf ${TMP_DIR}
+
+stage_message "Update system..."
+sudo pacman -Syu --noconfirm >/dev/null
+
+stage_message "Install packages..."
+sudo pacman -Sq --noconfirm --needed "${PACKAGES[@]}" 2>&1 | sed "/skipping\|nothing/d"
+
+stage_message "Install aur packages..."
+yay -S --noconfirm --needed "${AUR_PACKAGES[@]}" 2>&1 | sed "/skipping\|nothing/d"
+
+stage_message "Setup rtl88x2bu driver..."
+sudo cp -f ${HOME_SYSTEM_DIR}/etc/modprobe.d/99-88x2bu.conf /etc/modprobe.d/
+sudo cp -f ${HOME_SYSTEM_DIR}/etc/NetworkManager/conf.d/disable-random-mac.conf /etc/NetworkManager/conf.d/
+sudo cp -f ${HOME_SYSTEM_DIR}/etc/NetworkManager/conf.d/disable-wifi-powersave.conf /etc/NetworkManager/conf.d/
+
+# add to kernel params usbcore.autosuspend=-1
+# echo 0 255 255 400 3 > /proc/net/rtl88x2bu/wlan0/scan_param
+
+
+stage_message "Clear tmp dir..."
+rm -rf ${TMP_DIR}
+
+info_message "Archlinux setup completed.\n"

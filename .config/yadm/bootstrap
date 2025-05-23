@@ -1,0 +1,44 @@
+#!/bin/bash
+
+set -eufo pipefail
+
+trap 'exit 1' INT
+trap 'kill 0' EXIT
+
+ID=""
+ID_LIKE=""
+
+echo -e "[yadm bootstrap] Run bootstrap..."
+
+sudo_loop() {
+  while :; do
+    sleep 30
+    sudo -v &> /dev/null || break
+  done &
+}
+
+if sudo -v; then
+  sudo_loop
+else
+  exit 1
+fi
+
+if [[ "$(uname -s)" == "Linux" ]] && [[ -f "/etc/os-release" ]]; then
+  source /etc/os-release
+  if [[ "$ID" == "arch" || "$ID_LIKE" == *"arch"* ]]; then
+    echo -e "\n[yadm bootstrap] Arch linux detected. Run bootstrap.archlinux..."
+    bash "${HOME}/.config/yadm/bootstrap.archlinux"
+
+    if [[ "$(uname -n)" == "workstation" ]]; then
+      echo -e "\n[yadm bootstrap] Arch linux workstation detected. Run bootstrap.archlinux.workstation..."
+      bash "${HOME}/.config/yadm/bootstrap.archlinux.workstation"
+    fi
+  else
+    echo -e "\n[yadm bootstrap] Unsupported linux distribution. Skipping...\n"
+  fi
+else
+  echo -e "\n[yadm bootstrap] Unsupported OS. Skipping...\n"
+  exit 1
+fi
+
+echo -e "[yadm bootstrap] Bootstrap completed.\n"
