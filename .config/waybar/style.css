@@ -28,28 +28,39 @@
 #disk,
 #cpu,
 #pulseaudio {
-  padding: 10px 10px 8px;
+  padding: 6px 13px 6px;
+}
+
+#memory,
+#temperature,
+#disk,
+#cpu {
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 #language {
   font-weight: 600;
-  font-size: 20px;
   min-width: 30px;
-  padding-top: 7px;
-  color: @subtext1;
+  padding-left: 7px;
+  padding-right: 7px;
+  color: @blue;
+  background-color: @mantle;
 }
 
 #network.wifi,
 #network.ethernet {
-  color: @green;
+  /* color: @green; */
+  color: @text;
 }
 
 #bluetooth.connected {
-  color: @blue;
+  /* color: @blue; */
+  color: @text;
 }
 
 #pulseaudio.volume {
-  color: @peach;
+  color: @green;
 }
 
 #pulseaudio.microphone {
