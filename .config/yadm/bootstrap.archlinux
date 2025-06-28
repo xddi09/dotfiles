@@ -50,6 +50,7 @@ PACKAGES=(
   ripgrep
   rofi-wayland
   slurp
+  tailscale
   tmux
   trash-cli
   ttf-dejavu
