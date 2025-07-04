@@ -74,23 +74,23 @@ AUR_PACKAGES=(
 
 info_message "ArchLinux setup started."
 
-stage_message "Clear tmp dir..."
+stage_message "Prepare tmp dir..."
 rm -rf ${TMP_DIR}
 
 stage_message "Update system..."
-sudo pacman -Syu --noconfirm >/dev/null
+sudo pacman -Syu --noconfirm 
 
 stage_message "Install packages..."
-sudo pacman -Sq --noconfirm --needed "${PACKAGES[@]}" 2>&1 | sed "/skipping\|nothing/d"
+sudo pacman -Sq --noconfirm --needed "${PACKAGES[@]}"
 
 stage_message "Install yay..."
 if ! command -v yay &> /dev/null; then
-  git clone https://aur.archlinux.org/yay.git ${TMP_DIR}/yay 2>&1 | sed "/Cloning into/d"
+  git clone https://aur.archlinux.org/yay.git ${TMP_DIR}/yay
   makepkg -si -D ${TMP_DIR}/yay --needed --noconfirm
 fi
 
 stage_message "Install aur packages..."
-yay -S --noconfirm --needed "${AUR_PACKAGES[@]}" 2>&1 | sed "/skipping\|nothing/d"
+yay -S --noconfirm --needed "${AUR_PACKAGES[@]}"
 
 stage_message "Install GNU Pass extensions..."
 if [ ! -d "/usr/lib/password-store/extensions/" ]; then
@@ -132,7 +132,15 @@ if [ ! -d "${FONTS_DIR}/RobotoMono" ]; then
   tar xf ${TMP_DIR}/RobotoMono.tar.xz -C ${FONTS_DIR}/RobotoMono
 fi
 
+stage_message "Install dev tools..."
+if [ ! -d "$HOME/.pyenv" ]; then
+  curl -fsSL https://pyenv.run | bash
+fi
+if [ ! -d "$HOME/.local/share/pypoetry" ]; then
+  curl -sSL https://install.python-poetry.org | python3 -
+fi
+
 stage_message "Clear tmp dir..."
 rm -rf ${TMP_DIR}
 
-info_message "Archlinux setup completed."
+info_message "Archlinux setup completed.\n"
