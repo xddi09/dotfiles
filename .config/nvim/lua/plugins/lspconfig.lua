@@ -36,7 +36,28 @@ M.config = function()
     return open_floating_preview(contents, syntax, opts, ...)
   end
 
-  lspconfig.lua_ls.setup({ capabilities = capabilities, handlers = handlers })
+  lspconfig.lua_ls.setup({
+    capabilities = capabilities,
+    handlers = handlers
+  })
+
+  lspconfig.basedpyright.setup({
+    capabilities = capabilities,
+    handlers = handlers,
+    settings = {
+      basedpyright = {
+        useLibraryCodeForTypes = true,
+        analysis = {
+          autoSearchPaths = true,
+        },
+      },
+    }
+  })
+
+  lspconfig.ruff.setup({
+    capabilities = capabilities,
+    handlers = handlers
+  })
 
   map("n", "[d", function()
     vim.diagnostic.jump({ count = -1, float = true })
@@ -44,6 +65,16 @@ M.config = function()
   map("n", "]d", function()
     vim.diagnostic.jump({ count = 1, float = true })
   end, { desc = "Next diagnostic" })
+
+  vim.diagnostic.config({
+    virtual_lines = true,
+    virtual_text = false,
+    underline = true,
+    float = { source = "always" },
+    severity_sort = true,
+    signs = true,
+    update_in_insert = false,
+  })
 
   vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -62,8 +93,8 @@ M.config = function()
       bufmap("n", "gD", vim.lsp.buf.declaration, "Jump to declaration")
       bufmap("n", "gi", vim.lsp.buf.implementation, "Jump to implementation")
       bufmap("n", "gr", vim.lsp.buf.references, "Jump to implementation")
+      bufmap("n", "<leader>ca", vim.lsp.buf.code_action, "Code actions (LSP)")
       bufmap("n", "<leader>lr", ":IncRename ", "Rename")
-      bufmap("n", "<leader>la", vim.lsp.buf.code_action, "Code actions")
       bufmap("n", "<leader>lf", function()
         -- vim.lsp.buf.format({ async = true })
         require("conform").format({

@@ -9,22 +9,27 @@ function M.config()
 
   noice.setup({
     cmdline = {
+      enabled = true,
       format = {
         cmdline = { pattern = "^:", icon = "", lang = "vim" },
       },
     },
-    notify = {
-      enabled = false,
-    },
-    messages = {
-      enabled = false,
-    },
+    -- notify = {
+    --   enabled = false,
+    -- },
+    -- messages = {
+    --   enabled = false,
+    -- },
     lsp = {
       hover = {
         enabled = false,
       },
       signature = {
         enabled = false,
+        auto_open = {
+          enabled = false,
+          trigger = true,
+        }
       },
     },
   })

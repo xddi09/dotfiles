@@ -138,6 +138,7 @@ if [ ! -d "$HOME/.pyenv" ]; then
 fi
 if [ ! -d "$HOME/.local/share/pypoetry" ]; then
   curl -sSL https://install.python-poetry.org | python3 -
+  poetry config virtualenvs.in-project true
 fi
 
 stage_message "Clear tmp dir..."
