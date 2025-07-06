@@ -32,18 +32,18 @@ blinking = "On"
 shape = "Block"
 
 [font]
-size = 16
+size = 13
 
 [font.normal]
-family = "RobotoMono Nerd Font Mono"
+family = "RobotoMono Nerd Font Propo"
 style = "Regular"
 
 [font.bold]
-family = "RobotoMono Nerd Font Mono"
+family = "RobotoMono Nerd Font Propo"
 style = "Bold"
 
 [font.italic]
-family = "RobotoMono Nerd Font Mono"
+family = "RobotoMono Nerd Font Propo"
 style = "Italic"
 
 [mouse]

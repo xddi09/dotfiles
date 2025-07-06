@@ -33,5 +33,6 @@ require("lazy").setup({
   require("plugins.harpoon"),
   require("plugins.noice"),
   require("plugins.zen"),
+  require("plugins.tmux"),
   require("plugins.blankline"),
 })
